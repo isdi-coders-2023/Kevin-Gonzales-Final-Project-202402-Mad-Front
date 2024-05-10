@@ -8,28 +8,28 @@ import { StateService } from '../../services/state/state.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  template: `<h2>Login</h2>
-    <form [formGroup]="formLogin" (ngSubmit)="submit()">
-      <input
-        type="text"
-        placeholder="username or email"
-        id="username"
-        formControlName="user"
-      />
-      <input
-        type="password"
-        placeholder="password"
-        id="password"
-        formControlName="password"
-      />
-      <button type="submit" [disabled]="formLogin.invalid">Go!</button>
-    </form>
+ selector: 'app-login',
+ standalone: true,
+ imports: [ReactiveFormsModule],
+ template: `<h2>Login</h2>
+  <form [formGroup]="formLogin" (ngSubmit)="submit()">
+   <input
+    type="text"
+    placeholder="username or email"
+    id="username"
+    formControlName="user"
+   />
+   <input
+    type="password"
+    placeholder="password"
+    id="password"
+    formControlName="password"
+   />
+   <button type="submit" [disabled]="formLogin.invalid">Go!</button>
+  </form>
 
-    <p role="none" (click)="onClickRegister()">Or Register</p> `,
-  styles: `
+  <p role="none" (click)="onClickRegister()">Or Register</p> `,
+ styles: `
   form{
     display: flex;
     flex-direction: column;
@@ -49,39 +49,38 @@ import { Router } from '@angular/router';
   `,
 })
 export default class LoginComponent {
-  private repo = inject(UsersService);
-  private state = inject(StateService);
-  private fb = inject(FormBuilder);
-  router = inject(Router);
+ private repo = inject(UsersService);
+ private state = inject(StateService);
+ private fb = inject(FormBuilder);
+ router = inject(Router);
 
-  formLogin = this.fb.group({
-    user: ['', Validators.required],
-    password: ['', Validators.required],
+ formLogin = this.fb.group({
+  user: ['', Validators.required],
+  password: ['', Validators.required],
+ });
+
+ submit() {
+  const { user, password } = this.formLogin.value;
+  const userLogin = { password } as UserLoginDto;
+
+  if (user!.includes('@')) {
+   userLogin.email = this.formLogin.value.user as string;
+  } else {
+   userLogin.username = this.formLogin.value.user as string;
+  }
+
+  this.repo.login(userLogin).subscribe({
+   next: ({ token }) => {
+    this.state.setLogin(token);
+   },
+   error: (err) => {
+    console.log(err);
+    this.state.setLoginState('error');
+   },
   });
+ }
 
-  submit() {
-    const { user, password } = this.formLogin.value;
-    const userLogin = { password } as UserLoginDto;
-
-    if (user!.includes('@')) {
-      userLogin.email = this.formLogin.value.user as string;
-    } else {
-      userLogin.username = this.formLogin.value.user as string;
-    }
-
-    this.repo.login(userLogin).subscribe({
-      next: ({ token }) => {
-        this.state.setLogin(token);
-      },
-      error: (err) => {
-        console.log(err);
-        this.state.setLoginState('error');
-      },
-    });
-  }
-
-  onClickRegister() {
-    this.router.navigate(['register']);
-    this.state.setRegister();
-  }
+ onClickRegister() {
+  this.state.setRegisterForm();
+ }
 }
