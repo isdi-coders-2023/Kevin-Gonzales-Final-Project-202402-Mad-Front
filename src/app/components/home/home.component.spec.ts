@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let service: StateService;
+  //  let service: StateService;
 
   const mockStateService = jasmine.createSpyObj('StateService', {
     getState: of({ loginState: 'logged' }),

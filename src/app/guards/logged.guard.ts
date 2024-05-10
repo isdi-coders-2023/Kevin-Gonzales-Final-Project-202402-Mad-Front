@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { State, StateService } from '../services/state/state.service';

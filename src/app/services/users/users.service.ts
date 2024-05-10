@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environmentDev } from '../../../enviroments/environment.development';
-import { UserLoginDto, UserRegisterDto } from '../../models/users.model';
+import { User, UserLoginDto, UserRegisterDto } from '../../models/users.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class UsersService {
     );
   }
 
-  getById(id: string) {
-    return this.httpClient.get(this.backUrl + '/' + id);
+  getById(id: string): Observable<User> {
+    return this.httpClient.get(this.backUrl + '/' + id) as Observable<User>;
   }
 
   register(data: UserRegisterDto) {

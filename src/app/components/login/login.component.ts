@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/template/interactive-supports-focus */
+/* eslint-disable @angular-eslint/template/click-events-have-key-events */
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users/users.service';
@@ -26,7 +28,7 @@ import { Router } from '@angular/router';
       <button type="submit" [disabled]="formLogin.invalid">Go!</button>
     </form>
 
-    <p (click)="onClickRegister()">Or Register</p> `,
+    <p role="none" (click)="onClickRegister()">Or Register</p> `,
   styles: `
   form{
     display: flex;
@@ -72,6 +74,7 @@ export default class LoginComponent {
         this.state.setLogin(token);
       },
       error: (err) => {
+        console.log(err);
         this.state.setLoginState('error');
       },
     });

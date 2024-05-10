@@ -32,7 +32,7 @@ const initialState: State = {
   providedIn: 'root',
 })
 export class StateService {
-  private state$ = new BehaviorSubject<State>(initialState);
+  public state$ = new BehaviorSubject<State>(initialState);
   private clubsService = inject(ClubsService);
   private userService = inject(UsersService);
   jwtDecode = jwtDecode;
@@ -79,12 +79,6 @@ export class StateService {
       loginState: 'idle',
       token: null,
       currenPayload: null,
-    });
-  }
-
-  loadClubs() {
-    this.clubsService.getClubs().subscribe((clubs) => {
-      this.state$.next({ ...this.state$.value, clubs });
     });
   }
 }
