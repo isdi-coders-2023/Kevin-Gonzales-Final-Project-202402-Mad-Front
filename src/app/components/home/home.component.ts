@@ -7,46 +7,42 @@ import LoginComponent from '../login/login.component';
 import RegisterComponent from '../register/register.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  template: `
-    <app-header />
-
-    @switch (state.loginState) { @case ('idle') {
-    <app-login />
-    }@case ('register') {
-    <app-register />
-    } @case ('logged') {
-    <app-menu />
-    } @case ('error') {
-    <p>Try again</p>
-    <app-login />
-    }}
-
-    <app-footer />
-  `,
-  styles: `
+ selector: 'app-home',
+ standalone: true,
+ template: `
+  @switch (state.loginState) { @case ('idle') {
+  <app-login />
+  }@case ('register') {
+  <app-register />
+  } @case ('logged') {
+  <app-menu />
+  } @case ('error') {
+  <p>Try again</p>
+  <app-login />
+  }}
+ `,
+ styles: `
   *{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }`,
-  imports: [
-    HeaderComponent,
-    LoginComponent,
-    FooterComponent,
-    MenuComponent,
-    RegisterComponent,
-  ],
+ imports: [
+  HeaderComponent,
+  LoginComponent,
+  FooterComponent,
+  MenuComponent,
+  RegisterComponent,
+ ],
 })
 export default class HomeComponent implements OnInit {
-  stateService = inject(StateService);
-  state!: State;
+ stateService = inject(StateService);
+ state!: State;
 
-  ngOnInit() {
-    this.stateService.getState().subscribe((state) => {
-      this.state = state;
-    });
-  }
+ ngOnInit() {
+  this.stateService.getState().subscribe((state) => {
+   this.state = state;
+  });
+ }
 }

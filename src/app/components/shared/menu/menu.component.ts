@@ -27,16 +27,16 @@ export class MenuComponent {
  router = inject(Router);
 
  onClubs() {
-  this.router.navigate(['/clubs']);
+  this.router.navigate(['clubs']);
  }
  onMembers() {
-  this.router.navigate(['/members']);
+  this.router.navigate(['members']);
  }
  onShop() {
-  this.router.navigate(['/shop']);
+  this.router.navigate(['shop']);
   alert('Shop is coming soon!');
  }
  onMyProfile() {
-  this.router.navigate(['/myProfile']);
+  this.router.navigate(['myprofile']);
  }
 }

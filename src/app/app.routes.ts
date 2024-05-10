@@ -14,7 +14,7 @@ export const routes: Routes = [
  {
   path: 'clubs',
   // canActivate: [loggedGuard],
-  loadComponent: () => import('./components/login/login.component'),
+  loadComponent: () => import('./components/clubs/clubs.component'),
  },
  {
   path: 'members',
@@ -27,7 +27,7 @@ export const routes: Routes = [
   loadComponent: () => import('./components/shop/shop.component'),
  },
  {
-  path: 'myProfile',
+  path: 'myprofile',
   loadComponent: () => import('./components/my-profile/my-profile.component'),
  },
  { path: '**', redirectTo: 'home' },
