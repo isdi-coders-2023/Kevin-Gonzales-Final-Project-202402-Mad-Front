@@ -11,7 +11,7 @@ describe('MyProfileComponent', () => {
       imports: [MyProfileComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MyProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
