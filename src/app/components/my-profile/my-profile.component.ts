@@ -7,7 +7,10 @@ import { StateService } from '../../services/state/state.service';
  selector: 'app-my-profile',
  standalone: true,
  imports: [],
- template: ` <p>my-profile works!</p> `,
+ template: `
+  <h2>my profile</h2>
+  <img src="" alt="" />
+ `,
  styles: ``,
 })
 export default class MyProfileComponent {
