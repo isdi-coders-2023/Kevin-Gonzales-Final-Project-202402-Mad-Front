@@ -1,13 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { StateService } from './services/state/state.service';
+import HomeComponent from './components/home/home.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: ` <app-home /> `,
+  styles: `
+  *{
+    box-sizing: border-box;
+  }
+  `,
+  imports: [RouterOutlet, HomeComponent],
 })
 export class AppComponent {
-  title = 'front';
+  stateService = inject(StateService);
+
+  constructor() {
+    this.setInitialLogin();
+  }
+
+  setInitialLogin() {
+    const stringToken = localStorage.getItem('fansWorldProject');
+    if (stringToken) {
+      const { token } = JSON.parse(stringToken);
+      this.stateService.setLogin(token);
+    }
+  }
 }
