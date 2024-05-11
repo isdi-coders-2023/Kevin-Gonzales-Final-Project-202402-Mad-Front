@@ -1,11 +1,9 @@
-/* eslint-disable @angular-eslint/template/interactive-supports-focus */
-/* eslint-disable @angular-eslint/template/click-events-have-key-events */
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UsersService } from '../../services/users/users.service';
-import { UserLoginDto } from '../../models/users.model';
-import { StateService } from '../../services/state/state.service';
 import { Router } from '@angular/router';
+import { UserLoginDto } from '../../../models/users.model';
+import { StateService } from '../../../services/state/state.service';
+import { UsersService } from '../../../services/users/users.service';
 
 @Component({
  selector: 'app-login',
@@ -72,6 +70,7 @@ export default class LoginComponent {
   this.repo.login(userLogin).subscribe({
    next: ({ token }) => {
     this.state.setLogin(token);
+    this.state.setLoginState('logged');
    },
    error: (err) => {
     console.log(err);
@@ -81,6 +80,6 @@ export default class LoginComponent {
  }
 
  onClickRegister() {
-  this.state.setRegisterForm();
+  return this.state.setRegisterForm();
  }
 }

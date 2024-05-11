@@ -13,11 +13,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
   <router-outlet></router-outlet>
   <app-footer></app-footer>
  `,
- styles: `
-  *{
-    box-sizing: border-box;
-  }
-  `,
+ styles: ``,
  imports: [RouterOutlet, HomeComponent, HeaderComponent, FooterComponent],
 })
 export class AppComponent {

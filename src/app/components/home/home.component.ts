@@ -3,8 +3,8 @@ import { HeaderComponent } from '../shared/header/header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { StateService, State } from '../../services/state/state.service';
 import { MenuComponent } from '../shared/menu/menu.component';
-import LoginComponent from '../login/login.component';
-import RegisterComponent from '../register/register.component';
+import LoginComponent from '../core/login/login.component';
+import RegisterComponent from '../core/register/register.component';
 
 @Component({
  selector: 'app-home',

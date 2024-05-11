@@ -34,7 +34,6 @@ export class MenuComponent {
  }
  onShop() {
   this.router.navigate(['shop']);
-  alert('Shop is coming soon!');
  }
  onMyProfile() {
   this.router.navigate(['myprofile']);

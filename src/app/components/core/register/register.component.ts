@@ -6,9 +6,9 @@ import {
  Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { StateService } from '../../services/state/state.service';
-import { UsersService } from '../../services/users/users.service';
-import { UserRegisterDto } from '../../models/users.model';
+import { UserRegisterDto } from '../../../models/users.model';
+import { StateService } from '../../../services/state/state.service';
+import { UsersService } from '../../../services/users/users.service';
 
 @Component({
  selector: 'app-register',
@@ -33,7 +33,7 @@ import { UserRegisterDto } from '../../models/users.model';
    <input type="date" id="birthday" formControlName="birthday" />
    <button type="submit" [disabled]="formRegister.invalid">Go!</button>
   </form>
-  <p role="none" (click)="onLogin()">Already have an account? Login</p>
+  <p role="none" (click)="onClickLogin()">Already have an account? Login</p>
  `,
  styles: ` form{
     display: flex;
@@ -76,14 +76,12 @@ export default class RegisterComponent {
    birthday: this.formRegister.value.birthDateString,
   };
 
-  return this.repo.register(newUser).subscribe((data) => {
-   console.log(data);
+  return this.repo.register(newUser).subscribe(() => {
    this.router.navigate(['home']);
   });
  }
 
- onLogin() {
-  this.router.navigate(['/login']);
-  this.state.setLoginForm();
+ onClickLogin() {
+  return this.state.setLoginForm();
  }
 }
