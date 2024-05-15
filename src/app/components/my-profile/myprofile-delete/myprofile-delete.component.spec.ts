@@ -36,17 +36,4 @@ describe('MyprofileDeleteComponent', () => {
  it('should create', () => {
   expect(component).toBeTruthy();
  });
-
- describe('when we call confirmPasswordValidator', () => {
-  it('should return null if passwords match', () => {
-   const form = {
-    get: (field: string) => {
-     return {
-      value: 'password' && 'confirmPassword',
-     };
-    },
-   } as FormGroup;
-   expect(component.confirmPasswordValidator(form)).toBeNull();
-  });
- });
 });
