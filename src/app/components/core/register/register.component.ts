@@ -74,7 +74,17 @@ export default class RegisterComponent {
   };
 
   this.repo.register(newUser).subscribe(() => {
-   this.state.setLoginForm();
+   this.repo
+    .login({
+     email: newUser.email,
+     password: newUser.password,
+    })
+    .subscribe((res) => {
+     localStorage.setItem('token', JSON.stringify(res.token));
+     this.state.setLogin(res.token);
+     this.state.setLoginState('logged');
+     this.router.navigate(['home']);
+    });
   });
  }
 

@@ -63,7 +63,7 @@ export default class MyprofileEditComponent {
 
  constructor() {
   this.formEdit = this.fb.group({
-   avatar: [this.user.avatar || ''],
+   avatar: [this.user.avatar ? this.user.avatar.publicId : ''],
    username: [this.user.username],
    country: [this.user.country],
   });
