@@ -1,50 +1,77 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
  FormBuilder,
  FormGroup,
  ReactiveFormsModule,
  Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from '../../../services/users/users.service';
+import MyProfileComponent from '../my-profile.component';
+import { User } from '../../../models/users.model';
+import { StateService } from '../../../services/state/state.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
  selector: 'app-myprofile-delete',
  standalone: true,
- imports: [ReactiveFormsModule],
+ imports: [ReactiveFormsModule, JsonPipe],
  template: `
-  <h2>delete profile</h2>
-  <p>please, confirm your password for continue</p>
-  <form [formGroup]="formDelete" (ngSubmit)="onSubmit()">
-   <input type="password" placeholder="password" />
-   <input type="password" placeholder="confirm password" />
-   <button>confirm</button>
-  </form>
+  <div id="deleteCard">
+   <h2>delete profile</h2>
+   <p>please, confirm writting "sudo delete" for continue</p>
+   <form [formGroup]="formDelete" (ngSubmit)="onSubmit()">
+    <div id="delInp">
+     <input type="text" placeholder="sudo delete" formControlName="confirm1" />
+     <input type="text" placeholder="sudo delete" formControlName="confirm2" />
+    </div>
+    <button (click)="onCancel()">❌</button>
+    <button type="submit" [disabled]="formDelete.invalid">✅</button>
+   </form>
+   {{ formDelete.value | json }}
+  </div>
  `,
- styles: ``,
+ styleUrl: './myprofile-delete.component.css',
 })
-export class MyprofileDeleteComponent {
- private fb = inject(FormBuilder);
+export default class MyprofileDeleteComponent {
+ @Input({ required: true })
+ user!: User;
+
+ state = inject(StateService);
+ main = inject(MyProfileComponent);
+ activatedRoute = inject(ActivatedRoute);
+ repo = inject(UsersService);
  formDelete: FormGroup;
  router = inject(Router);
 
- constructor() {
-  this.formDelete = this.fb.group({
-   password: ['', Validators.required],
-   confirmPassword: ['', [Validators.required, this.confirmPasswordValidator]],
-  });
+ constructor(private fb: FormBuilder) {
+  this.formDelete = this.fb.group(
+   {
+    confirm1: ['', Validators.required],
+    confirm2: ['', Validators.required],
+   },
+   { asyncValidators: this.isSudoDelete }
+  );
  }
 
- confirmPasswordValidator(formDelete: FormGroup) {
-  if (
-   formDelete.get('confirmPassword')?.value ===
-   formDelete.get('password')?.value
-  ) {
+ async isSudoDelete(
+  formDelete: FormGroup
+ ): Promise<{ [key: string]: boolean } | null> {
+  if (formDelete.get('confirm1')?.value === 'sudo delete') {
    return null;
   }
-  return { passwordNotMatch: true };
+  return { isNotSudoDelete: true };
  }
 
  onSubmit() {
-  this.router.navigate(['home']);
+  const id = this.user.id;
+  this.repo.delete(id).subscribe(() => {
+   this.state.setLoginState('idle');
+   this.router.navigate(['home']);
+  });
+ }
+
+ onCancel() {
+  this.main.funcOption = 'view';
  }
 }

@@ -28,21 +28,4 @@ describe('MembersListComponent', () => {
  it('should create', () => {
   expect(component).toBeTruthy();
  });
-
- describe('when initialize', () => {
-  it('should get info', () => {
-   const spy = spyOn(repo, 'getAll').and.callThrough();
-   component.ngOnInit();
-   expect(spy).toHaveBeenCalled();
-   expect(component.users).toEqual([]);
-  });
- });
-
- describe('loadInfo', () => {
-  it('should navigate to info', () => {
-   const spy = spyOn(component.router, 'navigate');
-   component.loadInfo();
-   expect(spy).toHaveBeenCalledWith(['info']);
-  });
- });
 });

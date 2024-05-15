@@ -1,4 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
 * {
-  font-family: Karantina, sans-serif;
+ box-sizing: border-box;
+ font-family: Karantina, sans-serif;
+}
+
+body {
+ margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+ body {
+  background-color: rgb(32, 32, 32);
+  color: white;
+ }
+
+ h1 {
+  color: black;
+ }
+}
+
+@media (width>800px) {
+ h1 {
+  font-size: 80px;
+ }
+ #menuHeader {
+  display: flex;
+ }
 }

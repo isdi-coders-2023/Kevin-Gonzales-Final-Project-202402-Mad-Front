@@ -6,7 +6,10 @@ import MembersListComponent from './members-list/members-list.component';
  standalone: true,
  template: ` <h2>members</h2>
   <app-members-list />`,
- styles: ``,
+ styles: `*{
+  text-align:center;
+  font-size:2rem;
+ }`,
  imports: [MembersListComponent],
 })
 export default class MembersComponent {}

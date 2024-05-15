@@ -26,7 +26,7 @@ export const routes: Routes = [
   loadComponent: () => import('./components/members/members.component'),
  },
  {
-  path: 'info',
+  path: 'info/:id',
   title: 'Info Member',
   loadComponent: () =>
    import('./components/members/members-info/members-info.component'),

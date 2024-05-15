@@ -6,10 +6,27 @@ import { User } from '../../../models/users.model';
  standalone: true,
  imports: [],
  template: `
-  <img src="../assets/Default_Avatar.png" alt="default Image" />
-  <p>{{ item.username }}</p>
+  <div id="userCard">
+   <img
+    src="../assets/Default_Avatar.png"
+    alt="{{ item.username }}+'-avatar'"
+   />
+   <p>{{ item.username }}</p>
+  </div>
  `,
- styles: ``,
+ styles: `
+ *{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  }
+
+ img{
+  width: 20px;
+  height: 20px;
+ }
+ `,
 })
 export default class MembersCardComponent {
  @Input()

@@ -1,0 +1,65 @@
+* {
+ font-size: 2rem;
+}
+img {
+ width: 200px;
+ height: 200px;
+}
+
+#myProfileCard {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ border-radius: 20px;
+ background-color: #f6f1f1;
+ margin-inline: 2rem;
+ margin-block: 2rem;
+ padding-block: 5rem;
+ gap: 1rem;
+}
+
+#dataView {
+ text-align: center;
+}
+
+#buttoms {
+ display: flex;
+ justify-content: space-around;
+}
+
+button {
+ border: none;
+ border-radius: 20px;
+ width: 150px;
+}
+
+@media (width > 800px) {
+ h2 {
+  text-align: center;
+ }
+
+ #myProfileCard {
+  width: 100%;
+ }
+
+ #profileView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  gap: 2rem;
+ }
+
+ #dataView {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+ }
+}
+
+@media (prefers-color-scheme: dark) {
+ #myProfileCard {
+  background-color: #2e2e2e;
+ }
+}

@@ -1,0 +1,19 @@
+* {
+ font-size: 2rem;
+}
+
+#userCard {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding-block: 2rem;
+}
+
+@media (width>800px) {
+ #userCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+ }
+}
