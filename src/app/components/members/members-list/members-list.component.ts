@@ -41,7 +41,7 @@ export default class MembersListComponent implements OnDestroy {
  }
 
  loadInfo(id: string) {
-  this.router.navigate(['info', id]);
+  this.router.navigate(['members/', id]);
  }
 
  ngOnDestroy(): void {

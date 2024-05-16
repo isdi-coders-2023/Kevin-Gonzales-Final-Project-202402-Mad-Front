@@ -8,10 +8,10 @@ import { StateService } from '../../../services/state/state.service';
  imports: [RouterModule],
  template: ` <nav>
   <ul class="menu">
-   <li role="none" (click)="onClubs()">Clubs</li>
-   <li role="none" (click)="onMembers()">Members</li>
-   <li role="none" (click)="onShop()">Shop (Soon)</li>
-   <li role="none" (click)="onMyProfile()">My Profile</li>
+   <li role="none" (click)="onClubs()">clubs</li>
+   <li role="none" (click)="onMembers()">members</li>
+   <li role="none" (click)="onShop()">shop (soon)</li>
+   <li role="none" (click)="onMyProfile()">my profile</li>
   </ul>
  </nav>`,
  styleUrls: ['./menu.component.css'],

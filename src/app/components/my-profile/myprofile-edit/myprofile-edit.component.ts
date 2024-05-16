@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { UsersService } from '../../../services/users/users.service';
 import MyProfileComponent from '../my-profile.component';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { StateService } from '../../../services/state/state.service';
     <form [formGroup]="formEdit" (ngSubmit)="onSubmit()">
      <div id="editData">
       <div id="editAvatar">
-       @if(user.avatar){
+       @if(user.avatar !== null){
        <img src="{{ user.avatar.secureUrl }}" alt="" /> } @else{
        <img src="../assets/Default_Avatar.png" alt="default Image" />
        }
@@ -29,11 +29,6 @@ import { StateService } from '../../../services/state/state.service';
        />
       </div>
       <div id="editInfo">
-       <input
-        type="text"
-        placeholder="{{ user.username }}"
-        formControlName="username"
-       />
        <input
         type="text"
         placeholder="{{ user.country }}"
@@ -49,49 +44,53 @@ import { StateService } from '../../../services/state/state.service';
  `,
  styleUrls: ['myprofile-edit.component.css'],
 })
-export default class MyprofileEditComponent {
+export default class MyprofileEditComponent implements OnInit {
  @Input({
   required: true,
  })
  user!: User;
  activatedRoute = inject(ActivatedRoute);
  repo = inject(UsersService);
- main = inject(MyProfileComponent);
  state = inject(StateService);
  fb = inject(FormBuilder);
- formEdit: FormGroup;
+ formEdit!: FormGroup;
+ main = inject(MyProfileComponent);
 
  constructor() {
-  this.formEdit = this.fb.group({
-   avatar: [this.user.avatar ? this.user.avatar.publicId : ''],
-   username: [this.user.username],
-   country: [this.user.country],
-  });
-
   this.state.getState().subscribe((state) => {
    if (state.currenUser) this.user = state.currenUser;
   });
  }
 
+ ngOnInit(): void {
+  this.formEdit = this.fb.group({
+   avatar: [''],
+   username: [''],
+   country: [''],
+  });
+ }
+
  onSubmit() {
-  // const editUser: UserUpdateDto = {
-  //  avatar: this.formEdit.value.avatar,
-  //  username: this.formEdit.value.username,
-  //  country: this.formEdit.value.country,
-  //  email: this.formEdit.value.email,
-  //  password: this.formEdit.value.password,
-  // };
-  const editUser = new FormData() as UserUpdateDto;
-  editUser.username = this.formEdit.value.username;
-  editUser.country = this.formEdit.value.country;
-  editUser.email = this.formEdit.value.email;
-  editUser.avatar = this.formEdit.value.avatar;
+  const editUser: UserUpdateDto = {
+   country:
+    this.formEdit.value.country === ''
+     ? this.user.country
+     : this.formEdit.value.country,
+   avatar:
+    this.formEdit.value.avatar === ''
+     ? this.user.avatar
+     : this.formEdit.value.avatar,
+  };
+
+  // const editUser = new FormData() as UserUpdateDto;
+  // editUser.username = this.formEdit.value.username;
+  // editUser.country = this.formEdit.value.country;
+  // editUser.avatar = this.formEdit.value.avatar;
 
   const id = this.user.id;
 
-  return this.repo.update(id, editUser).subscribe((user) => {
-   this.state.state.currenUser = user as User;
-   console.log(user);
+  return this.repo.update(id, editUser).subscribe(() => {
+   console.log(editUser.avatar);
    this.setViewState();
   });
  }

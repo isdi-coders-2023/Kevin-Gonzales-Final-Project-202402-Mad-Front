@@ -6,7 +6,6 @@ import { User } from '../../models/users.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { StateService } from '../../services/state/state.service';
 import { Subscription } from 'rxjs';
-
 @Component({
  selector: 'app-my-profile',
  standalone: true,
@@ -39,6 +38,7 @@ export default class MyProfileComponent {
  }
 
  setEditState() {
+  console.log('edit', this.user);
   this.funcOption = 'edit';
  }
 

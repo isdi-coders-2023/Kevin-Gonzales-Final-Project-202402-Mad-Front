@@ -1,0 +1,11 @@
+* {
+ display: flex;
+ gap: 10px;
+ justify-content: center;
+ align-items: center;
+}
+
+img {
+ width: 20px;
+ height: 20px;
+}

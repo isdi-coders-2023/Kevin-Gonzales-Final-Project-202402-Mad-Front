@@ -1,15 +1,13 @@
-import { Avatar } from './avatar.model';
+import { Avatar } from './image.model';
 import { Club } from './clubs.model';
-
-type Role = 'admin' | 'user';
 
 export type User = {
  id: string;
  username: string;
- country?: string;
  email: string;
- role: Role;
+ country?: string;
  avatar: Avatar | null;
+ role: 'admin' | 'user';
  clubs: Club[];
 };
 
@@ -31,5 +29,5 @@ export type UserUpdateDto = {
  email?: string;
  avatar?: string | null;
  country?: string;
- role?: Role;
+ role?: 'admin' | 'user';
 };

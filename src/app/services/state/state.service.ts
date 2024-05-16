@@ -4,6 +4,7 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UsersService } from '../users/users.service';
 import { User } from '../../models/users.model';
+import { ClubsService } from '../clubs/clubs.service';
 
 type LoginState = 'idle' | 'register' | 'logged' | 'error';
 
@@ -36,6 +37,7 @@ const initialState: State = {
 export class StateService {
  public state$ = new BehaviorSubject<State>(initialState);
  private userService = inject(UsersService);
+ private clubsService = inject(ClubsService);
  jwtDecode = jwtDecode;
 
  getState(): Observable<State> {
@@ -100,5 +102,15 @@ export class StateService {
 
  getUser(id: string) {
   return this.state.users.find((user) => user.id === id);
+ }
+
+ getClubs() {
+  this.clubsService.getClubs().subscribe((clubs) => {
+   this.state$.next({ ...this.state$.value, clubs });
+  });
+ }
+
+ getClub(id: string) {
+  return this.clubsService.getClubById(id);
  }
 }

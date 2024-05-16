@@ -15,17 +15,18 @@ import { User } from '../../../models/users.model';
   </div>
  `,
  styles: `
- *{
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  }
+ * {
+ display: flex;
+ gap: 10px;
+ justify-content: center;
+ align-items: center;
+}
 
- img{
-  width: 20px;
-  height: 20px;
- }
+img {
+ width: 20px;
+ height: 20px;
+}
+
  `,
 })
 export default class MembersCardComponent {

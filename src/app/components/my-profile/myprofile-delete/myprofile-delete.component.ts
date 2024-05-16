@@ -28,7 +28,6 @@ import { JsonPipe } from '@angular/common';
     <button (click)="onCancel()">❌</button>
     <button type="submit" [disabled]="formDelete.invalid">✅</button>
    </form>
-   {{ formDelete.value | json }}
   </div>
  `,
  styleUrl: './myprofile-delete.component.css',
