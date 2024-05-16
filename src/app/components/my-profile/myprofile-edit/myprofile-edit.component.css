@@ -1,0 +1,89 @@
+* {
+ font-size: 2rem;
+}
+img {
+ width: 200px;
+ height: 200px;
+}
+
+input {
+ width: 80wv;
+ border-radius: 20px;
+}
+input::placeholder {
+ text-align: center;
+}
+
+#editCard {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ border-radius: 20px;
+ background-color: #f6f1f1;
+ margin-inline: 2rem;
+ margin-block: 2rem;
+ padding-block: 5rem;
+ gap: 1rem;
+}
+
+form {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+#editAvatar,
+#editInfo,
+#editData {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+#updateAvatar {
+ font-size: 15px;
+ border: none;
+}
+
+p {
+ margin: 20px;
+}
+
+#buttoms {
+ display: flex;
+ justify-content: space-around;
+}
+button {
+ border: none;
+ border-radius: 20px;
+ width: 150px;
+}
+
+@media (width > 800px) {
+ #editCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ }
+
+ form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ }
+
+ #editData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15rem;
+ }
+}
+
+@media (prefers-color-scheme: dark) {
+ #editCard {
+  background-color: #2e2e2e;
+ }
+}

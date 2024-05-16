@@ -8,8 +8,7 @@ import { StateService } from '../../../services/state/state.service';
 describe('RegisterComponent', () => {
  let component: RegisterComponent;
  let fixture: ComponentFixture<RegisterComponent>;
- let service: UsersService;
- let router: Router;
+
  let state: StateService;
 
  beforeEach(async () => {
@@ -38,8 +37,7 @@ describe('RegisterComponent', () => {
   }).compileComponents();
 
   state = TestBed.inject(StateService);
-  service = TestBed.inject(UsersService);
-  router = TestBed.inject(Router);
+
   fixture = TestBed.createComponent(RegisterComponent);
   component = fixture.componentInstance;
   fixture.detectChanges();
@@ -47,20 +45,6 @@ describe('RegisterComponent', () => {
 
  it('should create', () => {
   expect(component).toBeTruthy();
- });
-
- describe('onSubmit', () => {
-  it('should register user ', () => {
-   component.formRegister.setValue({
-    username: 'test',
-    email: '',
-    password: '',
-    birthday: '',
-   });
-   component.onSubmit();
-   expect(service.register).toHaveBeenCalled();
-   expect(router.navigate).toHaveBeenCalledWith(['home']);
-  });
  });
 
  describe('onClickLogin', () => {

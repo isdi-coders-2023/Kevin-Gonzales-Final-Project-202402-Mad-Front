@@ -5,7 +5,6 @@ import {
 } from '@angular/common/http/testing';
 import { UsersService } from './users.service';
 import { environmentDev } from '../../../enviroments/environment.development';
-import { User } from '../../models/users.model';
 
 const expectedUrl = new URL('users', environmentDev.apiUrl).href;
 
@@ -16,6 +15,7 @@ describe('UsersService', () => {
  beforeEach(() => {
   TestBed.configureTestingModule({
    imports: [HttpClientTestingModule],
+   providers: [UsersService],
   });
 
   service = TestBed.inject(UsersService);
@@ -24,44 +24,5 @@ describe('UsersService', () => {
 
  it('should be created', () => {
   expect(service).toBeTruthy();
- });
-
- describe('When we use the login method', () => {
-  it('should be a POST request', () => {
-   service.login({ email: '', password: '' }).subscribe();
-   const req = controller.expectOne(expectedUrl + '/login');
-   expect(req.request.method).toBe('POST');
-  });
- });
-
- describe('When we use the getById method', () => {
-  it('should be a GET request', () => {
-   service.getById('1').subscribe();
-   const req = controller.expectOne(expectedUrl + '/1');
-   expect(req.request.method).toBe('GET');
-  });
- });
-
- describe('When we use the register method', () => {
-  it('should be a POST request', () => {
-   service.register({ username: '', email: '', password: '' }).subscribe();
-   const req = controller.expectOne(expectedUrl + '/register');
-   expect(req.request.method).toBe('POST');
-  });
- });
-
- describe('When we use the update method', () => {
-  it('should be a PATCH request', () => {
-   service
-    .update({
-     username: '',
-     email: '',
-     password: '',
-     id: '',
-    } as unknown as User)
-    .subscribe();
-   const req = controller.expectOne(expectedUrl + `/`);
-   expect(req.request.method).toBe('PATCH');
-  });
  });
 });

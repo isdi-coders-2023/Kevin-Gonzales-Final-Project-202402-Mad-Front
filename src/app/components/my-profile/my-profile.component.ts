@@ -1,54 +1,57 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { JsonPipe } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
-import { MyprofileEditComponent } from './myprofile-edit/myprofile-edit.component';
+import { Component, inject } from '@angular/core';
 import { MyprofileViewComponent } from './myprofile-view/myprofile-view.component';
-import { MyprofileDeleteComponent } from './myprofile-delete/myprofile-delete.component';
-
-type ProfileState = 'view' | 'edit' | 'delete';
-
-export type State = {
- profileState: ProfileState;
-};
-
-const initialState: State = {
- profileState: 'view',
-};
-
+import MyprofileEditComponent from './myprofile-edit/myprofile-edit.component';
+import MyprofileDeleteComponent from './myprofile-delete/myprofile-delete.component';
+import { User } from '../../models/users.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { StateService } from '../../services/state/state.service';
+import { Subscription } from 'rxjs';
 @Component({
  selector: 'app-my-profile',
  standalone: true,
  template: `
-  @switch (state.profileState) { @case ('view') {
-  <app-myprofile-view />
-  } @case ('edit') {
-  <app-myprofile-edit />
+  @switch (funcOption) { @case ('view') {
+  <app-myprofile-view [user]="user" />
+  } @case ('edit' ) {
+  <app-myprofile-edit [user]="user" />
   } @case ('delete') {
-  <app-myprofile-delete />
-  }}
+  <app-myprofile-delete [user]="user" /> }}
  `,
  styles: ``,
  imports: [
-  JsonPipe,
-  RouterModule,
-  MyprofileEditComponent,
   MyprofileViewComponent,
+  MyprofileEditComponent,
   MyprofileDeleteComponent,
  ],
 })
 export default class MyProfileComponent {
- public state$ = new BehaviorSubject<State>(initialState);
+ funcOption: 'view' | 'edit' | 'delete' = 'view';
+ state = inject(StateService);
+ fb = inject(FormBuilder);
+ subscription: Subscription;
+ user!: User;
 
- getState() {
-  return this.state$.asObservable();
+ constructor() {
+  this.subscription = this.state.getState().subscribe(() => {
+   this.user = this.state.state.currenUser as User;
+  });
  }
 
- get state() {
-  return this.state$.value;
+ setEditState() {
+  console.log('edit', this.user);
+  this.funcOption = 'edit';
  }
 
- setProfileState(profileState: ProfileState) {
-  this.state$.next({ ...this.state$.value, profileState });
+ setDeleteState() {
+  this.funcOption = 'delete';
+ }
+
+ confirmPasswordValidator(fb: FormGroup) {
+  const password = fb.get('password')?.value;
+  const confirmPassword = fb.get('confirmPassword')?.value;
+  if (password === confirmPassword) {
+   return null;
+  }
+  return { passwordNotMatch: true };
  }
 }

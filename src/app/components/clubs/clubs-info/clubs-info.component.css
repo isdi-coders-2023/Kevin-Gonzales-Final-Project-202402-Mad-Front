@@ -1,0 +1,24 @@
+* {
+ font-size: 2rem;
+}
+
+img {
+ width: 200px;
+ height: 200px;
+}
+
+#clubCard {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding-block: 2rem;
+}
+
+@media (width>800px) {
+ #clubCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+ }
+}

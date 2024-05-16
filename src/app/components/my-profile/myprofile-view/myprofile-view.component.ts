@@ -1,32 +1,67 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { User } from '../../../models/users.model';
 import MyProfileComponent from '../my-profile.component';
+import { Router } from '@angular/router';
+import { UsersService } from '../../../services/users/users.service';
+import { StateService } from '../../../services/state/state.service';
+import ClubsComponent from '../../clubs/clubs.component';
 
 @Component({
  selector: 'app-myprofile-view',
  standalone: true,
- imports: [],
- template: ` <h2>my profile</h2>
-  <img src="../assets/Default_Avatar.png" alt="default Image" />
-  <p>username</p>
-  <p>country</p>
-  <p>00/00</p>
-  <p>clubs</p>
+ imports: [ClubsComponent],
+ providers: [ClubsComponent],
 
-  <div>
-   <button>validations</button>
-   <button (click)="setEditState()">edit</button>
-   <button (click)="setDeleteState()">delete</button>
-  </div>`,
- styles: '',
+ template: `
+  <div id="myProfileCard">
+   <h2>my profile</h2>
+   <div id="profileView">
+    <div id="dataView">
+     <div id="imgView">
+      @if(user.avatar!==null){
+      <img src="{{ user.avatar.secureUrl }}" alt="avatar" />} @else{
+      <img src="../assets/Default_Avatar.png" alt="default Image" />
+      }
+     </div>
+     <div id="infoView">
+      <p>{{ user.username }}</p>
+      <p>{{ user.email }}</p>
+      <p>{{ user.country }}</p>
+      <p>{{ user.clubs }}</p>
+     </div>
+    </div>
+    <div id="buttoms">
+     @if(user.role==='admin'){
+     <button (click)="onValidation()">❗️</button>
+     }
+     <button (click)="setEditForm()">✏️</button>
+     <button (click)="setDeleteState()">⛔️</button>
+    </div>
+   </div>
+  </div>
+ `,
+ styleUrl: './myprofile-view.component.css',
 })
 export class MyprofileViewComponent {
- private main = inject(MyProfileComponent);
+ @Input({
+  required: true,
+ })
+ user!: User;
+ main = inject(MyProfileComponent);
+ route = inject(Router);
+ service = inject(UsersService);
+ state = inject(StateService);
+ repoClub = inject(ClubsComponent);
 
- setEditState() {
-  this.main.setProfileState('edit');
+ setEditForm() {
+  this.main.setEditState();
  }
 
  setDeleteState() {
-  this.main.setProfileState('delete');
+  this.main.setDeleteState();
+ }
+
+ onValidation() {
+  this.route.navigate(['validations']);
  }
 }

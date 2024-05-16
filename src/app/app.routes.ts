@@ -20,16 +20,27 @@ export const routes: Routes = [
   loadComponent: () => import('./components/clubs/clubs.component'),
  },
  {
+  path: 'clubs/:id',
+  title: 'Info Club',
+  loadComponent: () =>
+   import('./components/clubs/clubs-info/clubs-info.component'),
+ },
+ {
   path: 'members',
   title: 'Members',
   // canActivate: [loggedGuard],
   loadComponent: () => import('./components/members/members.component'),
  },
  {
-  path: 'info',
+  path: 'members/:id',
   title: 'Info Member',
   loadComponent: () =>
    import('./components/members/members-info/members-info.component'),
+ },
+ {
+  path: 'validations',
+  title: 'Validations',
+  loadComponent: () => import('./components/validations/validations.component'),
  },
  {
   path: 'shop',

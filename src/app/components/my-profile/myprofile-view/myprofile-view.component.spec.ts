@@ -3,6 +3,7 @@ import { MyprofileViewComponent } from './myprofile-view.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import MyProfileComponent from '../my-profile.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('MyprofileViewComponent', () => {
  let component: MyprofileViewComponent;
@@ -12,7 +13,12 @@ describe('MyprofileViewComponent', () => {
  beforeEach(async () => {
   await TestBed.configureTestingModule({
    imports: [MyprofileViewComponent, HttpClientTestingModule],
-   providers: [HttpClient, MyProfileComponent],
+   providers: [
+    HttpClient,
+    MyProfileComponent,
+    MyprofileViewComponent,
+    { provide: ActivatedRoute, useValue: {} },
+   ],
   }).compileComponents();
 
   main = TestBed.inject(MyProfileComponent);
@@ -27,15 +33,15 @@ describe('MyprofileViewComponent', () => {
 
  describe('setEditState', () => {
   it('should set profile state to edit', () => {
-   component.setEditState();
-   expect(main.state.profileState).toMatch('edit');
+   component.setEditForm();
+   expect(main.funcOption).toMatch('edit');
   });
  });
 
  describe('setDeleteStar', () => {
   it('should set profile state to delete', () => {
    component.setDeleteState();
-   expect(main.state.profileState).toMatch('delete');
+   expect(main.funcOption).toMatch('delete');
   });
  });
 });

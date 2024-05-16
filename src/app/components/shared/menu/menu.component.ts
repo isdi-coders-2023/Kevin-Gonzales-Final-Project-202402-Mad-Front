@@ -1,28 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { StateService } from '../../../services/state/state.service';
-import { UsersService } from '../../../services/users/users.service';
 
 @Component({
  selector: 'app-menu',
  standalone: true,
  imports: [RouterModule],
  template: ` <nav>
-  <ul>
-   <li role="none" (click)="onClubs()">Clubs</li>
-   <li role="none" (click)="onMembers()">Members</li>
-   <li role="none" (click)="onShop()">Shop (Soon)</li>
-   <li role="none" (click)="onMyProfile()">My Profile</li>
+  <ul class="menu">
+   <li role="none" (click)="onClubs()">clubs</li>
+   <li role="none" (click)="onMembers()">members</li>
+   <li role="none" (click)="onShop()">shop (soon)</li>
+   <li role="none" (click)="onMyProfile()">my profile</li>
   </ul>
  </nav>`,
- styles: `
-  li{
-    list-style: none;
-  }
-  `,
+ styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
- private repo = inject(UsersService);
  private state = inject(StateService);
  router = inject(Router);
 

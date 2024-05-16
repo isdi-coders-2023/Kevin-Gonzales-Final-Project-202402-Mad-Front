@@ -9,42 +9,28 @@ import { UsersService } from '../../../services/users/users.service';
  selector: 'app-login',
  standalone: true,
  imports: [ReactiveFormsModule],
- template: `<h2>Login</h2>
-  <form [formGroup]="formLogin" (ngSubmit)="submit()">
-   <input
-    type="text"
-    placeholder="username or email"
-    id="username"
-    formControlName="user"
-   />
-   <input
-    type="password"
-    placeholder="password"
-    id="password"
-    formControlName="password"
-   />
-   <button type="submit" [disabled]="formLogin.invalid">Go!</button>
-  </form>
-
-  <p role="none" (click)="onClickRegister()">Or Register</p> `,
- styles: `
-  form{
-    display: flex;
-    flex-direction: column;
-    background-color: #f4f4f4;
-    border-radius: 20px;
-    padding: 20px;
-    gap: 20px;
-    align-items: strech;
-  }
-  input{
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    font-size: 3rem;
-  }
-
-  `,
+ template: `
+  <div>
+   <h2>login</h2>
+   <form [formGroup]="formLogin" (ngSubmit)="submit()">
+    <input
+     type="text"
+     placeholder="username/email"
+     id="username"
+     formControlName="user"
+    />
+    <input
+     type="password"
+     placeholder="password"
+     id="password"
+     formControlName="password"
+    />
+    <button type="submit" [disabled]="formLogin.invalid">go!</button>
+   </form>
+  </div>
+  <p role="none" (click)="onClickRegister()">or register</p>
+ `,
+ styleUrl: './login.component.css',
 })
 export default class LoginComponent {
  private repo = inject(UsersService);
@@ -64,7 +50,7 @@ export default class LoginComponent {
   if (user!.includes('@')) {
    userLogin.email = this.formLogin.value.user as string;
   } else {
-   userLogin.username = this.formLogin.value.user as string;
+   userLogin.username = this.formLogin.value.user?.toLowerCase() as string;
   }
 
   this.repo.login(userLogin).subscribe({
@@ -73,7 +59,7 @@ export default class LoginComponent {
     this.state.setLoginState('logged');
    },
    error: (err) => {
-    console.log(err);
+    console.log('error', err);
     this.state.setLoginState('error');
    },
   });

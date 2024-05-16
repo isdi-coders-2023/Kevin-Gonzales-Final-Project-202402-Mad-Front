@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
  let component: AppComponent;
- // let service: StateService;
  let fixture: ComponentFixture<AppComponent>;
 
  const mockStateService = jasmine.createSpyObj('StateService', {
@@ -33,7 +32,6 @@ describe('AppComponent', () => {
 
   fixture = TestBed.createComponent(AppComponent);
   component = fixture.componentInstance;
-  //    service = TestBed.inject(StateService);
   fixture.detectChanges();
  });
 

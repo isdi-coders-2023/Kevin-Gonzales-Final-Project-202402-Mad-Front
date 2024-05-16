@@ -10,7 +10,7 @@ describe('MembersComponent', () => {
  beforeEach(async () => {
   await TestBed.configureTestingModule({
    imports: [MembersComponent, HttpClientTestingModule],
-   providers: [HttpClient],
+   providers: [HttpClient, MembersComponent],
   }).compileComponents();
 
   fixture = TestBed.createComponent(MembersComponent);

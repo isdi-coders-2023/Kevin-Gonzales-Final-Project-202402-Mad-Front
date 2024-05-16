@@ -15,69 +15,76 @@ import { UsersService } from '../../../services/users/users.service';
  standalone: true,
  imports: [ReactiveFormsModule, RouterModule],
  template: `
-  <h2>Register</h2>
-  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
-   <input
-    type="text"
-    id="username"
-    placeholder="username"
-    formControlName="username"
-   />
-   <input type="email" id="email" placeholder="email" formControlName="email" />
-   <input
-    type="password"
-    id="password"
-    placeholder="password"
-    formControlName="password"
-   />
-   <input type="date" id="birthday" formControlName="birthday" />
-   <button type="submit" [disabled]="formRegister.invalid">Go!</button>
-  </form>
-  <p role="none" (click)="onClickLogin()">Already have an account? Login</p>
+  <div>
+   <h2>register</h2>
+   <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+    <input
+     type="text"
+     id="username"
+     placeholder="username"
+     formControlName="username"
+    />
+    <input
+     type="email"
+     id="email"
+     placeholder="email"
+     formControlName="email"
+    />
+    <input
+     type="password"
+     id="password"
+     placeholder="password"
+     formControlName="password"
+    />
+    <input
+     type="text"
+     id="country"
+     placeholder="country"
+     formControlName="country"
+    />
+    <button type="submit" [disabled]="formRegister.invalid">go!</button>
+   </form>
+  </div>
+  <p role="none" (click)="onClickLogin()">already have an account? login</p>
  `,
- styles: ` form{
-    display: flex;
-    flex-direction: column;
-    background-color: #f4f4f4;
-    border-radius: 20px;
-    padding: 20px;
-    gap: 20px;
-    align-items: strech;
-  }
-  input{
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    font-size: 3rem;
-  }
-  `,
+ styleUrl: './register.component.css',
 })
 export default class RegisterComponent {
- private repo = inject(UsersService);
- private state = inject(StateService);
- private fb = inject(FormBuilder);
+ repo = inject(UsersService);
+ state = inject(StateService);
+ fb = inject(FormBuilder);
  router = inject(Router);
  formRegister: FormGroup;
 
  constructor() {
   this.formRegister = this.fb.group({
    username: ['', Validators.required],
-   email: ['', Validators.required],
+   email: ['', [Validators.email, Validators.required]],
    password: ['', Validators.required],
-   birthday: [''],
+   country: [''],
   });
  }
 
  onSubmit() {
   const newUser: UserRegisterDto = {
-   username: this.formRegister.value.username,
+   username: this.formRegister.value.username.toLowerCase(),
    email: this.formRegister.value.email,
    password: this.formRegister.value.password,
-   birthday: this.formRegister.value.birthDateString,
+   country: this.formRegister.value.country,
   };
 
-  return this.repo.register(newUser).subscribe(() => {
-   this.router.navigate(['home']);
+  this.repo.register(newUser).subscribe(() => {
+   this.repo
+    .login({
+     email: newUser.email,
+     password: newUser.password,
+    })
+    .subscribe((res) => {
+     localStorage.setItem('token', JSON.stringify(res.token));
+     this.state.setLogin(res.token);
+     this.state.setLoginState('logged');
+     this.router.navigate(['home']);
+    });
   });
  }
 

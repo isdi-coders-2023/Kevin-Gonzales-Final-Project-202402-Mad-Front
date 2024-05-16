@@ -15,19 +15,14 @@ import RegisterComponent from '../core/register/register.component';
   }@case ('register') {
   <app-register />
   } @case ('logged') {
-  <app-menu />
+  <app-menu id="mainMenu" />
   } @case ('error') {
   <p>Try again</p>
   <app-login />
   }}
  `,
- styles: `
-  *{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }`,
+ styleUrls: ['./home.component.css'],
+
  imports: [
   HeaderComponent,
   LoginComponent,
