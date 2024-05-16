@@ -23,7 +23,7 @@ import { StateService } from '../../services/state/state.service';
   text-align:center;
   font-size:2rem;
  }
- 
+
  li{
   list-style:none
  }

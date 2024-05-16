@@ -11,7 +11,7 @@ describe('ValidationsInfoComponent', () => {
       imports: [ValidationsInfoComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ValidationsInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

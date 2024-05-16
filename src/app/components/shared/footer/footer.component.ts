@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
     height: 20%;
     background: "../../../../assets/footer.jpg";
   }
-  
+
   h2{
     align-items: center;
   }

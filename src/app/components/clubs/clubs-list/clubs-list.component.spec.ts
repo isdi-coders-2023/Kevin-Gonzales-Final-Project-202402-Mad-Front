@@ -11,7 +11,7 @@ describe('ClubsListComponent', () => {
       imports: [ClubsListComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ClubsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
