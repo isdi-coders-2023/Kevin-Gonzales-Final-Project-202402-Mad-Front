@@ -21,9 +21,7 @@ export class UsersService {
  }
 
  getById(id: string): Observable<User> {
-  const a = this.httpClient.get(this.backUrl + '/' + id) as Observable<User>;
-  a.subscribe((res) => console.log(res));
-  return a;
+  return this.httpClient.get(this.backUrl + '/' + id) as Observable<User>;
  }
 
  login(data: UserLoginDto) {
