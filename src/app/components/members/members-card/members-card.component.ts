@@ -7,10 +7,11 @@ import { User } from '../../../models/users.model';
  imports: [],
  template: `
   <div id="userCard">
-   <img
-    src="../assets/Default_Avatar.png"
-    alt="{{ item.username }}+'-avatar'"
-   />
+   @if(item.avatar){
+   <img src="{{ item.avatar.secureUrl }}" alt="{{ item.username }} avatar" />
+   } @else {
+   <img src="../assets/Default_Avatar.png" alt="{{ item.username }} avatar'" />
+   }
    <p>{{ item.username }}</p>
   </div>
  `,

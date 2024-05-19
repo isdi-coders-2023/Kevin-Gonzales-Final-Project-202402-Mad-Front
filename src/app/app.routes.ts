@@ -43,6 +43,14 @@ export const routes: Routes = [
   loadComponent: () => import('./components/validations/validations.component'),
  },
  {
+  path: 'validations/:id',
+  title: 'Info Validation',
+  loadComponent: () =>
+   import(
+    './components/validations/validations-info/validations-info.component'
+   ),
+ },
+ {
   path: 'shop',
   title: 'Shop',
   // canActivate: [loggedGuard],

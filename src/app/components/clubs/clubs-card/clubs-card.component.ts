@@ -6,18 +6,18 @@ import { Club } from '../../../models/clubs.model';
  standalone: true,
  imports: [],
  template: `
-  <div id="userCard">
-   @if(item.logo!==null){
-   <img src="{{ item.logo.secureUrl }}" alt="{{ item.name }}+'-logo'" />
+  <div id="clubCard">
+   @if(club.logo!==null){
+   <img src="{{ club.logo.secureUrl }}" alt="{{ club.name }} logo'" />
    }@else {
-   <img src="../assets/default_shield.png" alt="{{ item.name }}+' logo'" />
+   <img src="../assets/default_logo.png" alt="{{ club.name }} logo'" />
    }
-   <p>{{ item.name }}</p>
+   <p>{{ club.name }}</p>
   </div>
  `,
  styleUrl: './clubs-card.component.css',
 })
 export class ClubsCardComponent {
  @Input()
- item!: Club;
+ club!: Club;
 }

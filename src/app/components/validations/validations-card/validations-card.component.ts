@@ -7,12 +7,12 @@ import { Club } from '../../../models/clubs.model';
  imports: [],
  template: `
   <div id="validationCard">
-   @if(item.logo!==null){
-   <img src="{{ item.logo.secureUrl }}" alt="{{ item.name }}+'-logo'" />
-   }@else{
-   <img src="../assets/default_shield.png" alt="{{ item.name }}+'-logo'" />
+   @if (club.logo!==null) {
+   <img src="{{ club.logo.secureUrl }}" alt="{{ club.name }} logo" />
+   } @else {
+   <img src="../assets/default_logo.png" alt="{{ club.name }} logo" />
    }
-   <p>{{ item.name }}</p>
+   <p>{{ club.name }}</p>
   </div>
  `,
  styles: `
@@ -31,6 +31,6 @@ img {
  `,
 })
 export class ValidationsCardComponent {
- @Input()
- item!: Club;
+ @Input({ required: true })
+ club!: Club;
 }

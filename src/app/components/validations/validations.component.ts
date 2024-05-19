@@ -13,7 +13,7 @@ import { StateService } from '../../services/state/state.service';
   <ul>
    @for( item of clubs; track $index){
    <li role="none" (click)="loadInfo(item.id)">
-    <app-validations-card [item]="item" />
+    <app-validations-card [club]="item" />
    </li>
    }
   </ul>

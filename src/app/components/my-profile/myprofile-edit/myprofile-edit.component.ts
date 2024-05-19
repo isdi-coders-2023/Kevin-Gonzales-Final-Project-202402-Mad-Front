@@ -18,8 +18,15 @@ import { StateService } from '../../../services/state/state.service';
      <div id="editData">
       <div id="editAvatar">
        @if(user.avatar !== null){
-       <img src="{{ user.avatar.secureUrl }}" alt="" /> } @else{
-       <img src="../assets/Default_Avatar.png" alt="default Image" />
+       <img
+        src="{{ user.avatar.secureUrl }}"
+        alt="{{ user.username }} avatar"
+       />
+       } @else{
+       <img
+        src="../assets/Default_Avatar.png"
+        alt="{{ user.username }} avatar"
+       />
        }
        <input
         id="updateAvatar"

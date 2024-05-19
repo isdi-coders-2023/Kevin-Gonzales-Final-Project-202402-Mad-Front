@@ -9,7 +9,7 @@ import { State, StateService } from '../../../services/state/state.service';
  template: `
   <header>
    <h1 role="none" (click)="onClickLogo()">FAN'S WORLD</h1>
-   @if(router.url !== '/home'){
+   @if(state.loginState === 'logged' || router.url !== '/home'){
    <app-menu id="headerMenu" />}
   </header>
  `,
@@ -23,5 +23,9 @@ export class HeaderComponent {
 
  onClickLogo() {
   this.router.navigate(['/']);
+ }
+
+ onLogout() {
+  this.stateService.setLogout();
  }
 }

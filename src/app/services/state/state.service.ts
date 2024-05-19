@@ -101,7 +101,7 @@ export class StateService {
  }
 
  getUser(id: string) {
-  return this.state.users.find((user) => user.id === id);
+  return this.userService.getById(id);
  }
 
  getClubs() {
