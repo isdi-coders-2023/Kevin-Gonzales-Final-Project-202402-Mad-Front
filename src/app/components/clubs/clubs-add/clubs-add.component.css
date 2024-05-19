@@ -13,6 +13,10 @@ input {
  border-radius: 20px;
 }
 
+input::placeholder {
+ text-align: center;
+}
+
 button {
  font-size: 2rem;
  padding: 10px 20px;

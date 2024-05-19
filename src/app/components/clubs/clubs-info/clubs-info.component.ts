@@ -11,16 +11,17 @@ import { StateService } from '../../../services/state/state.service';
  template: `
   <div id="clubCard">
    <div id="clubLogo">
-    @if(item.logo!==null){
-    <img src="{{ item.logo.secureUrl }}" alt=" {{ item.name }} shield" />
+    @if (club.logo!==null) {
+    <img src="{{ club.logo.secureUrl }}" alt="{{ club.name }} logo" />
+    } @else {
+    <img src="../assets/default_logo.png" alt="{{ club.name }} logo" />
     }
-    <img src="assets/default_shield.png" alt=" Default Shield" />
    </div>
    <div id="clubData">
-    <h2>{{ item.name }}</h2>
-    <p>{{ item.country }}</p>
-    <p>{{ item.founded }}</p>
-    <p>{{ item.description }}</p>
+    <h2>{{ club.name }}</h2>
+    <p>{{ club.country }}</p>
+    <p>{{ club.founded }}</p>
+    <p>{{ club.description }}</p>
    </div>
   </div>
  `,
@@ -30,13 +31,13 @@ export default class ClubsInfoComponent implements OnDestroy {
  activatedRoute = inject(ActivatedRoute);
  state: StateService = inject(StateService);
  subscription: Subscription;
- item!: Club;
+ club!: Club;
 
  constructor() {
   this.subscription = this.activatedRoute.params.subscribe((params) => {
    this.state.getState().subscribe((state) => {
     try {
-     this.item = state.clubs.find(
+     this.club = state.clubs.find(
       (club: Club) => club.id === params['id']
      ) as Club;
     } catch (e) {

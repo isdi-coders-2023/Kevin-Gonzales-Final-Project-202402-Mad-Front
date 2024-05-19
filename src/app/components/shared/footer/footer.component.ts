@@ -11,14 +11,17 @@ import { Component } from '@angular/core';
  `,
  styles: `
 
-  footer{
-    height: 20%;
-    background: "../../../../assets/footer.jpg";
-  }
-
-  h2{
-    align-items: center;
-  }
+footer {
+      background-image: url('/assets/EkA5.gif'); 
+      background-size: cover;
+      background-position: center;
+      height: 20vh;
+      display: flex; 
+      justify-content:center;
+      align-items: center; 
+      text-align: center; 
+      color: white; 
+    }
   `,
 })
 export class FooterComponent {}

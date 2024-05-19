@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ClubsListComponent } from './clubs-list/clubs-list.component';
+import ClubsListComponent from './clubs-list/clubs-list.component';
 import { Router } from '@angular/router';
 import { ClubsAddComponent } from './clubs-add/clubs-add.component';
 import { StateService } from '../../services/state/state.service';
@@ -14,24 +14,26 @@ import { User } from '../../models/users.model';
   <div>
    <h2>clubs</h2>
    <app-clubs-list />
-   <p role="none" (click)="onClick()">Do you miss a club? Add it here</p>
+   <p role="none" (click)="onClick()">do you miss a club? Add it here</p>
    @if (user.role === 'admin') {
    <button (click)="onValidations()">❗️</button>
    }
   </div>
   } @case ('add') {
-  <h2>give us a club</h2>
-  <app-clubs-add />
+  <div>
+   <h2>give us a club</h2>
+   <app-clubs-add />
+  </div>
   } }
  `,
- styles: `div{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  align-content:center;
-  text-align:center;
-  font-size:2rem;
- }`,
+ styles: `
+    div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem
+  }
+    `,
  imports: [ClubsListComponent, ClubsAddComponent],
 })
 export default class ClubsComponent {

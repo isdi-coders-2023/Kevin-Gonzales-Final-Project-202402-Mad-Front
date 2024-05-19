@@ -48,7 +48,7 @@ export class ClubsAddComponent {
   this.AddClubForm = this.fb.group({
    logo: [''],
    name: [''],
-   founded: [0],
+   founded: [''],
    country: [''],
   });
  }

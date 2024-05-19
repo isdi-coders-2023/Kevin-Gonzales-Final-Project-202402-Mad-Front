@@ -12,7 +12,7 @@ import { ClubsCardComponent } from '../clubs-card/clubs-card.component';
   <ul>
    @for( item of clubs; track $index){
    <li role="none" (click)="loadInfo(item.id)">
-    <app-clubs-card [item]="item" />
+    <app-clubs-card [club]="item" />
    </li>
    }
   </ul>
@@ -20,7 +20,7 @@ import { ClubsCardComponent } from '../clubs-card/clubs-card.component';
  styleUrl: './clubs-list.component.css',
  imports: [ClubsCardComponent],
 })
-export class ClubsListComponent implements OnDestroy {
+export default class ClubsListComponent implements OnDestroy {
  state = inject(StateService);
  router = inject(Router);
  clubs: Club[] = [];

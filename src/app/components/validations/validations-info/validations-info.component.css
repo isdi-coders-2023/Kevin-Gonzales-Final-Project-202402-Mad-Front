@@ -1,0 +1,68 @@
+* {
+ font-size: 2rem;
+}
+
+#validatorCard {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding-block: 2rem;
+}
+
+form {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+#dataInput {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+#logoInput {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+#textInput {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 1rem;
+}
+
+img {
+ width: 200px;
+ height: 200px;
+}
+
+input {
+ text-align: center;
+ font-size: 2rem;
+ margin: 10px;
+ padding: 10px;
+ width: 300px;
+ border-radius: 20px;
+}
+
+button {
+ font-size: 2rem;
+ padding: 10px 20px;
+ margin: 10px;
+ border-radius: 20px;
+}
+
+@media (width>800px) {
+ #validatorCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+ }
+}

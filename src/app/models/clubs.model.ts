@@ -19,3 +19,12 @@ export type ClubCreateDto = {
  logo?: string | null;
  description?: string;
 };
+
+export type ClubUpdateDto = {
+ name: string;
+ country: string;
+ founded: number;
+ logo?: string | null;
+ description?: string;
+ state: 'validated' | 'pending';
+};
