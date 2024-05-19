@@ -12,15 +12,15 @@ import { Component } from '@angular/core';
  styles: `
 
 footer {
-      background-image: url('/assets/EkA5.gif'); 
+      background-image: url('/assets/EkA5.gif');
       background-size: cover;
       background-position: center;
       height: 20vh;
-      display: flex; 
+      display: flex;
       justify-content:center;
-      align-items: center; 
-      text-align: center; 
-      color: white; 
+      align-items: center;
+      text-align: center;
+      color: white;
     }
   `,
 })

@@ -11,7 +11,7 @@ describe('MembersDeleteComponent', () => {
       imports: [MembersDeleteComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MembersDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

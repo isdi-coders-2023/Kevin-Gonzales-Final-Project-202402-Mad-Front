@@ -11,7 +11,7 @@ describe('MenuHeaderComponent', () => {
       imports: [MenuHeaderComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MenuHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

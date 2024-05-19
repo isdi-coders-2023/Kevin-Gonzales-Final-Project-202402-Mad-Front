@@ -11,7 +11,7 @@ describe('MembersEditComponent', () => {
       imports: [MembersEditComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MembersEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
