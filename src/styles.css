@@ -7,6 +7,18 @@ body {
  margin: 0;
 }
 
+header {
+ min-height: 20vh;
+}
+
+footer {
+ min-height: 15vh;
+}
+
+main {
+ min-height: 65vh;
+}
+
 @media (prefers-color-scheme: dark) {
  body {
   background-color: rgb(32, 32, 32);

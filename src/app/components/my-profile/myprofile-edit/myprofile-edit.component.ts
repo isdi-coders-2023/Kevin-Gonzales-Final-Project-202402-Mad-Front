@@ -1,5 +1,12 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+ Component,
+ ElementRef,
+ Input,
+ OnInit,
+ ViewChild,
+ inject,
+} from '@angular/core';
 import { UsersService } from '../../../services/users/users.service';
 import MyProfileComponent from '../my-profile.component';
 import { ActivatedRoute } from '@angular/router';
@@ -33,6 +40,8 @@ import { StateService } from '../../../services/state/state.service';
         type="file"
         placeholder="update your avatar"
         formControlName="avatar"
+        #avatar
+        (change)="onFileChange()"
        />
       </div>
       <div id="editInfo">
@@ -62,6 +71,8 @@ export default class MyprofileEditComponent implements OnInit {
  fb = inject(FormBuilder);
  formEdit!: FormGroup;
  main = inject(MyProfileComponent);
+ @ViewChild('avatar') avatar!: ElementRef;
+ imageUrl: string | null = null;
 
  constructor() {
   this.state.getState().subscribe((state) => {
@@ -71,33 +82,29 @@ export default class MyprofileEditComponent implements OnInit {
 
  ngOnInit(): void {
   this.formEdit = this.fb.group({
-   avatar: [''],
-   username: [''],
+   avatar: null,
    country: [''],
   });
  }
+ onFileChange() {
+  const htmlElement: HTMLInputElement = this.avatar.nativeElement;
+  const file = htmlElement.files![0];
+  const reader = new FileReader();
+  reader.onload = () => {
+   this.imageUrl = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+  this.formEdit.patchValue({ avatar: file });
+ }
 
  onSubmit() {
-  const editUser: UserUpdateDto = {
-   country:
-    this.formEdit.value.country === ''
-     ? this.user.country
-     : this.formEdit.value.country,
-   avatar:
-    this.formEdit.value.avatar === ''
-     ? this.user.avatar
-     : this.formEdit.value.avatar,
-  };
-
-  // const editUser = new FormData() as UserUpdateDto;
-  // editUser.username = this.formEdit.value.username;
-  // editUser.country = this.formEdit.value.country;
-  // editUser.avatar = this.formEdit.value.avatar;
+  const fd = new FormData();
+  fd.append('avatar', this.formEdit.value.avatar);
+  fd.append('country', this.formEdit.value.country);
 
   const id = this.user.id;
 
-  return this.repo.update(id, editUser).subscribe(() => {
-   console.log(editUser.avatar);
+  return this.repo.update(id, fd as UserUpdateDto).subscribe(() => {
    this.setViewState();
   });
  }

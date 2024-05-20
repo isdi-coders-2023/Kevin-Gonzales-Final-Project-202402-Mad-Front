@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { User } from '../../../models/users.model';
+import { User, UserUpdateDto } from '../../../models/users.model';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../services/users/users.service';
 import { StateService } from '../../../services/state/state.service';
@@ -31,7 +31,7 @@ import MembersInfoComponent from '../members-info/members-info.component';
        <input
         id="updateAvatar"
         type="file"
-        placeholder="update your avatar"
+        placeholder="update avatar"
         formControlName="avatar"
        />
       </div>
@@ -43,7 +43,7 @@ import MembersInfoComponent from '../members-info/members-info.component';
       </div>
      </div>
      <div id="editBtns">
-      <button (click)="main.funcOptions = 'View'">❌</button>
+      <button (click)="setViewState()">❌</button>
       <button type="submit">✅</button>
      </div>
     </form>
@@ -66,13 +66,25 @@ export class MembersEditComponent {
  constructor() {
   this.formEditRole = this.fb.group({
    avatar: [null],
-   role: [this.user.role],
+   role: ['user'],
   });
  }
 
  onSubmit() {
-  this.repo.update(this.user.id, this.formEditRole.value).subscribe(() => {
-   this.main.funcOptions = 'View';
+  const editMember: UserUpdateDto = {
+   avatar:
+    this.formEditRole.value.avatar === null
+     ? this.user.avatar
+     : this.formEditRole.value.avatar,
+   role: this.formEditRole.value.role === 'user' ? 'user' : 'admin',
+  };
+
+  return this.repo.update(this.user.id, editMember).subscribe(() => {
+   this.setViewState();
   });
+ }
+
+ setViewState() {
+  this.main.funcOptions = 'View';
  }
 }

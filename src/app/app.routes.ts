@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { loggedGuard } from './guards/logged.guard';
 // import { loggedGuard } from './guards/logged.guard';
 
 export const routes: Routes = [

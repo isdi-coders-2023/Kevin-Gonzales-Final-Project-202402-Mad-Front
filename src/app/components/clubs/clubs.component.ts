@@ -27,11 +27,13 @@ import { User } from '../../models/users.model';
   } }
  `,
  styles: `
-    div {
+    * {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 2rem
+    font-size: 2rem;
+    margin-block: 2rem;
+    height: 100%
   }
     `,
  imports: [ClubsListComponent, ClubsAddComponent],

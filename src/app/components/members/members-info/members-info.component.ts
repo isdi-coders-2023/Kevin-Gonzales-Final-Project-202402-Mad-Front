@@ -31,8 +31,10 @@ import { MembersDeleteComponent } from '../members-delete/members-delete.compone
    </div>
    <div id="btnInfoUser">
     <button (click)="onBack()">Back</button>
+    @if (state.state.currenUser?.role === 'admin') {
     <button (click)="onEdit()">✏️</button>
     <button (click)="onDelete()">⛔️</button>
+    }
    </div>
    } @case ('Edit') {
    <app-members-edit [user]="item" />

@@ -3,7 +3,7 @@ img {
  height: 20px;
 }
 
-#userCard {
+#clubCard {
  display: flex;
  align-items: center;
  gap: 1rem;

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { Router } from '@angular/router';
 import { State, StateService } from '../../../services/state/state.service';
+import { MenuHeaderComponent } from '../menu-header/menu-header.component';
 
 @Component({
  selector: 'app-header',
@@ -9,12 +10,12 @@ import { State, StateService } from '../../../services/state/state.service';
  template: `
   <header>
    <h1 role="none" (click)="onClickLogo()">FAN'S WORLD</h1>
-   @if(state.loginState === 'logged' || router.url !== '/home'){
-   <app-menu id="headerMenu" />}
+   @if(router.url !== '/home') {
+   <app-menu-header />}
   </header>
  `,
  styleUrl: './header.component.css',
- imports: [MenuComponent],
+ imports: [MenuComponent, MenuHeaderComponent],
 })
 export class HeaderComponent {
  stateService = inject(StateService);

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MembersCardComponent } from './members-card.component';
+import MembersCardComponent from './members-card.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { User } from '../../../models/users.model';
 
@@ -14,7 +14,7 @@ describe('MembersCardComponent', () => {
 
   fixture = TestBed.createComponent(MembersCardComponent);
   component = fixture.componentInstance;
-  component.user = {
+  component.item = {
    username: 'test',
   } as User;
   fixture.detectChanges();
